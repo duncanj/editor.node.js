@@ -1,0 +1,171 @@
+import electra.Constants
+
+def modeMap = [
+        ".html" : "html",
+         ".htm" : "html",
+         ".css" : "css",
+      ".groovy" : "groovy",
+          ".go" : "groovy",
+        ".java" : "java",
+          ".js" : "javascript",
+        ".json" : "json",
+         ".lua" : "lua",
+          ".md" : "markdown",
+        ".perl" : "perl",
+         ".php" : "php",
+          ".py" : "python",
+          ".rb" : "ruby",
+       ".scala" : "scala",
+         ".sql" : "sql",
+         ".svg" : "svg",
+        ".text" : "text",
+         ".txt" : "text",
+         ".xml" : "xml",
+        ".yaml" : "yaml"
+]
+
+String suffix = resourceName.substring(resourceName.lastIndexOf('.'))
+String mode = modeMap.get(suffix)
+if( mode == null ) {
+    mode = "text"
+}
+
+if( createFile ) {
+    bannerMsg = "This file does not currently exist, but it will be created if you click 'save'."
+}
+
+
+html.html {
+    head {
+        title "Edit: $resourceName"
+        style( type: 'text/css', """
+            #editor {
+                position: absolute;
+                width: 98%;
+                height: 90%;
+                border: 1px solid #AACCFF;
+            }
+
+            .bannerMsg {
+                background: #FFFFCC;
+                border: 1px solid gray;
+                padding: 2px 10px;
+                margin: 0px 0px 10px 0px;
+                font-size:14px;
+                font-weight:200;
+                font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            }
+
+            .editHeader {
+                background-color: #888888;
+                //color: white;
+                height:40px;
+//                width: 100%;
+                position:relative;
+                top:0;left:0;right:0;
+                z-index:10000;
+                //line-height: 40px;
+                //font-size:18px;
+                //font-weight:200;
+                padding:0px 10px 0px 10px;
+                margin:0px 0px 5px 0px;
+                //font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            }
+        """)
+        script(type:"text/javascript", src:"/~/ace/src/ace.js", {
+            mkp.yield('//')
+        })
+        script(type:"text/javascript", src:"/~/ace/src/theme-tomorrow_night.js", {
+            mkp.yield('//')
+        })
+        script(type:"text/javascript", src:"/~/ace/src/mode-"+mode+".js", {
+            mkp.yield('//')
+        })
+        script(type:"text/javascript", src:"/~/ace/src/electra.js", {
+            mkp.yield('//')
+        })
+    }
+    body {
+//        div (class:'editHeaderOuter', style:'vertical-align: middle; height:40px; border: 1px solid #555555;  background-color: #888888;', {
+            div (class:'editHeader', {
+                table (width: '100%', height:'100%' ) {
+                    tr {
+                        td (valign:'center'){
+                            input (type:'button', id:'save', value:'Save', onclick:'save(form_post_url,editor.getValue())')
+                        }
+                        td (valign:'center'){
+                            div ({
+                                img (id:'feedback', src:'/~/ace/blank.png')
+                            })
+                        }
+                        td (valign:'center', width:'100%') {
+                            input (type:'text', id:'filename', value:resourceName, style:'width: 100%;', readonly:'readonly')
+                        }
+                        td (valign:'center'){
+                            input (type:'button', id:'close', value:'Close', onclick:"javascript:document.location.href='/$electraContext.project/$electraContext.instance/$electraContext.resource'")
+                        }
+                    }
+                }
+            })
+//        })
+
+        if( bannerMsg != null ) {
+            div (id:'bannerMsg', class:'bannerMsg', {
+                mkp.yieldUnescaped bannerMsg
+            })
+        }
+
+        div(id:"editor", {mkp.yield(resourceText)})            // The editor
+
+        script ("""
+            var form_post_url = "/$electraContext.project/$electraContext.instance/~save/$electraContext.resource"
+
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/tomorrow_night");
+
+            //var JavaMode = require("ace/mode/java").Mode;
+            //editor.getSession().setMode(new JavaMode());
+
+            editor.getSession().setMode(new (require("ace/mode/$mode").Mode));
+
+//            var mode = require("ace/mode/java").Mode;
+//            editor.getSession().setMode(new mode());
+
+        """)
+
+    }
+}
+
+/*
+<html>
+<head>
+    <style type='text/css'>
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="header">
+    <input type="button" value="Save">
+    <span></span>
+    <input type="button" value="Close">
+</div>
+
+<div id="editor">some text</div>
+<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/mode-java.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/tomorrow_night");
+
+    var JavaMode = require("ace/mode/java").Mode;
+    editor.getSession().setMode(new JavaMode());
+</script>
+
+</body>
+
+</html>
+*/
