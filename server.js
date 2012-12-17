@@ -1,6 +1,14 @@
 var http = require('http'), 
 	path = require("path")
- 	fs = require("fs");
+ 	fs = require("fs"),
+ 	exec = require( 'child_process' ).exec;
+ 	
+
+process.on( "uncaughtException", function( error ) {
+	console.error( "Uncaught exception: " + error.message );
+	console.trace();
+});
+ 	
 
 // sudo npm install winston
 /*
