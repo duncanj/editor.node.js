@@ -65,7 +65,9 @@ http.createServer(function (req, res) {
         res.end(out);        
   	} catch (e) {
         console.log(when()+" An error occurred:");
-        console.log(e);      
+        console.log(e);     
+        
+        // attempt to send something useful back to the client
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Error: '+e+'\n');      
     }
