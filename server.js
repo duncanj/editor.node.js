@@ -6,15 +6,15 @@ http.createServer(function (req, res) {
     try {
    	  fs.readFile(logfile, "binary", function(err, file) {
 	  	  if(err) {
-          response.writeHead(500, {"Content-Type": "text/plain"});
-          response.write(err + "\n");
-          response.end();
+          res.writeHead(500, {"Content-Type": "text/plain"});
+          res.write(err + "\n");
+          res.end();
           return;
         }
 
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        response.write(file, "binary");
-        response.end();
+        res.write(file, "binary");
+        res.end();
 
       });    
     } catch (e) {
