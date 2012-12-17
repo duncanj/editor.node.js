@@ -1,6 +1,5 @@
 #!/bin/bash
 PIDFILE=/var/tmp/editor.node.js-master-server.pid
-LOGFILE=/var/tmp/editor.node.js-master-server.log
 
 if [ -f $PIDFILE ]
 then
@@ -10,7 +9,7 @@ fi
 
 rm $PIDFILE
 
-EXPR="sudo node server.js >> $LOGFILE 2>&1 &"
+EXPR="sudo node server.js >> /var/tmp/editor.node.js-master-server.log 2>&1 &"
 eval $EXPR
 PID=$!
 
