@@ -38,13 +38,22 @@ http.createServer(function (req, res) {
     }
     return;
   } 
-  if( req.url == '/@configuration' ) {
-      
+  if( req.url == '/@configuration' ) {      
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Configuration: {"workDir": "'+workDir+'"}\n');
-
+    res.end('configuration: {"workDir": "'+workDir+'"}\n');
+    return;
+  }  
+  if( req.url.indexOf('/@edit/') == 0 ) {      
+    var pageRef = req.url.substring(7);
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    var out = "<html><head>"
+    + "</head><body>"
+    + "edit the page: "+ pageRef
+    + "</body></html>\n";
+    res.end(out);
     return;
   }
+  
   
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('You requested '+req.url+'\n');
