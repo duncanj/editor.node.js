@@ -41,7 +41,7 @@ http.createServer(function (req, res) {
   	res.end('You requested '+req.url+'\n');
   }
 }).listen(80);
-console.log(when()+' Server running on port 80, hopefully');
+console.log(when()+' Server re/started on port 80.');
 
 function when() {
 	return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');	
