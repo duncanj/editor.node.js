@@ -1,3 +1,15 @@
+
+Logging with timestamps
+=======================
+Tried winston, but it didn't seem to work.
+There are several date time libraries that look interesting:
+	http://stackoverflow.com/questions/10645994/node-js-how-to-format-a-date-string-in-utc
+	Moment looks the most impressive.
+
+
+Port 80
+=======
+
 Could proxy with apache, but apparently this causes one thread per request and removes all benefit of node.js.
 
 <VirtualHost 176.34.249.112:80>
@@ -14,3 +26,5 @@ Could proxy with apache, but apparently this causes one thread per request and r
 	ProxyPassReverse http://localhost:8150/
 </Location>
 </VirtualHost>
+
+Went with sudo.  This is probably dangerous and we should use iptables mapping instead.
