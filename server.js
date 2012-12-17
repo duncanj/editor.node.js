@@ -11,7 +11,7 @@ logger = new (winston.Logger)({
 }); 	
 */
 
-var workDir = "workspace";
+var workDir = "./workspace";
 
  	
 http.createServer(function (req, res) {
