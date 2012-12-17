@@ -3,7 +3,7 @@ var http = require('http'),
 
 // sudo npm install winston
 var winston = require('winston');
-var logger = new (winston.Logger)({
+logger = new (winston.Logger)({
     transports: [
       new (winston.transports.Console)({'timestamp':true})
     ]
