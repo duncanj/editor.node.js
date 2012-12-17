@@ -10,7 +10,7 @@ var logger = new (winston.Logger)({
 }); 	
  	
 http.createServer(function (req, res) {
-  console.log("Request for "+req.url)
+  logger.log("Request for "+req.url)
   if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
     try {
@@ -28,8 +28,8 @@ http.createServer(function (req, res) {
 
       });    
     } catch (e) {
-      console.log("An error occurred:");
-      console.log(e);      
+      logger.log("An error occurred:");
+      logger.log(e);      
     }
     
   } else {
@@ -37,4 +37,4 @@ http.createServer(function (req, res) {
   	res.end('Hello World, this is the server.  You requested '+req.url+'\n');
   }
 }).listen(80);
-console.log('Server running on port 80, hopefully');
+logger.log('Server running on port 80, hopefully');
