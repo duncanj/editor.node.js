@@ -49,6 +49,8 @@ http.createServer(function (req, res) {
         res.writeHead(200, {'Content-Type': 'text/html'});
         var editResource = workDir + '/' + pageRef;
         
+        console.log(when()+" Edit request for "+editResource);
+        
         var body = "";
         if( fs.existsSync(editResource) ) {
             body = "edit the page: "+ pageRef;        
