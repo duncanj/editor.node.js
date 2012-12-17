@@ -1,0 +1,14 @@
+<VirtualHost 176.34.249.112:80>
+  ServerAdmin xyz@176.34.249.112
+	ServerName 176.34.249.112
+	ServerAlias 176.34.249.112
+	ProxyRequests off
+	<Proxy *>
+		Order deny,allow
+		Allow from all
+	</Proxy>
+	<Location />
+	ProxyPass http://localhost:8150/
+	ProxyPassReverse http://localhost:8150/
+</Location>
+</VirtualHost>
