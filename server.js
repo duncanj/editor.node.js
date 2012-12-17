@@ -14,7 +14,7 @@ logger = new (winston.Logger)({
 
  	
 http.createServer(function (req, res) {
-  console.log(when()+" Request for "+req.url)
+  console.log(when()+" Request from "+req.connection.remoteAddress+" for "+req.url)
   if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
     try {
