@@ -32,7 +32,7 @@ http.createServer(function (req, res) {
 
       });    
     } catch (e) {
-      console.log("An error occurred:");
+      console.log(when()+" An error occurred:");
       console.log(e);      
     }
     
@@ -41,7 +41,7 @@ http.createServer(function (req, res) {
   	res.end('You requested '+req.url+'\n');
   }
 }).listen(80);
-console.log('Server running on port 80, hopefully');
+console.log(when()+' Server running on port 80, hopefully');
 
 function when() {
 	return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');	
