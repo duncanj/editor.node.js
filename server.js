@@ -1,6 +1,16 @@
 var http = require('http'), 
  	fs = require("fs");
+
+// sudo npm install winston
+var winston = require('winston');
+var logger = new (winston.Logger)({
+    transports: [
+      new (winston.transports.Console)({'timestamp':true})
+    ]
+}); 	
+ 	
 http.createServer(function (req, res) {
+  console.log("Request for "+req.url)
   if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
     try {
