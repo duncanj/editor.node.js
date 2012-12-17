@@ -2,15 +2,17 @@ var http = require('http'),
  	fs = require("fs");
 
 // sudo npm install winston
+/*
 var winston = require('winston');
 logger = new (winston.Logger)({
     transports: [
       new (winston.transports.Console)({'timestamp':true})
     ]
 }); 	
+*/
  	
 http.createServer(function (req, res) {
-  logger.log("Request for "+req.url)
+  console.log("Request for "+req.url)
   if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
     try {
@@ -28,8 +30,8 @@ http.createServer(function (req, res) {
 
       });    
     } catch (e) {
-      logger.log("An error occurred:");
-      logger.log(e);      
+      console.log("An error occurred:");
+      console.log(e);      
     }
     
   } else {
@@ -37,4 +39,4 @@ http.createServer(function (req, res) {
   	res.end('Hello World, this is the server.  You requested '+req.url+'\n');
   }
 }).listen(80);
-logger.log('Server running on port 80, hopefully');
+console.log('Server running on port 80, hopefully');
