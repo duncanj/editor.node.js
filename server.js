@@ -4,7 +4,7 @@ http.createServer(function (req, res) {
   if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
     try {
-   	  fs.readFile(filename, "binary", function(err, file) {
+   	  fs.readFile(logfile, "binary", function(err, file) {
 	  	  if(err) {
           response.writeHead(500, {"Content-Type": "text/plain"});
           response.write(err + "\n");
