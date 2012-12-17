@@ -44,22 +44,27 @@ http.createServer(function (req, res) {
     return;
   }  
   if( req.url.indexOf('/@edit/') == 0 ) {      
-    var pageRef = req.url.substring(7);
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    var editResource = workDir + '/' + pageRef;
-    
-    var body = "";
-    if( fs.existsSync(editResource) ) {
-        body = "edit the page: "+ pageRef;        
-    } else {
-        body = "Could not edit the page: "+ pageRef + " - it doesn't exist (yet)";
-    }    
-    
-    var out = "<html><head>"
-    + "</head><body>"
-    + body
-    + "</body></html>\n";
-    res.end(out);
+  	try {
+        var pageRef = req.url.substring(7);
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        var editResource = workDir + '/' + pageRef;
+        
+        var body = "";
+        if( fs.existsSync(editResource) ) {
+            body = "edit the page: "+ pageRef;        
+        } else {
+            body = "Could not edit the page: "+ pageRef + " - it doesn't exist (yet)";
+        }    
+        
+        var out = "<html><head>"
+        + "</head><body>"
+        + body
+        + "</body></html>\n";
+        res.end(out);        
+  	} catch (e) {
+      console.log(when()+" An error occurred:");
+      console.log(e);      
+    }
     return;
   }
   
