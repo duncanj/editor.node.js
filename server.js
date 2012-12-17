@@ -1,7 +1,7 @@
 var http = require('http'), 
  	fs = require("fs");
 http.createServer(function (req, res) {
-  if( req.url == '@process.log' ) {
+  if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
  	  fs.readFile(filename, "binary", function(err, file) {
 	    if(err) {
