@@ -43,11 +43,12 @@ http.createServer(function (req, res) {
     res.end('configuration: {"workDir": "'+workDir+'"}\n');
     return;
   }  
-  if( req.url.indexOf('/@edit/') == 0 ) {      
+  if( req.url.indexOf('/@edit/') == 0 ) {
+  	console.log(when()+" Entering edit...");  // debugging
   	try {
         var pageRef = req.url.substring(7);
         res.writeHead(200, {'Content-Type': 'text/html'});
-        console.log(when()+" About to concatenate strings..");  // debugging 3..
+        console.log(when()+" About to concatenate strings..");  // debugging 4..
         
         var editResource = workDir + '/' + pageRef;
         
