@@ -44,24 +44,19 @@ http.createServer(function (req, res) {
     return;
   }  
   if( req.url.indexOf('/@edit/') == 0 ) {
-  	console.log(when()+" Entering edit...");  // debugging 5
   	try {
         var pageRef = req.url.substring(7);
         res.writeHead(200, {'Content-Type': 'text/html'});
-        console.log(when()+" About to concatenate strings..");  // debugging 4..
         
         var editResource = workDir + '/' + pageRef;
         
         console.log(when()+" Edit request for "+editResource);
         
-        var body = "";
-/*        
         if( fs.existsSync(editResource) ) {
             body = "edit the page: "+ pageRef;        
         } else {
             body = "Could not edit the page: "+ pageRef + " - it doesn't exist (yet)";
         }    
-*/        
         var out = "<html><head>"
         + "</head><body>"
         + body
