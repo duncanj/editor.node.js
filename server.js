@@ -47,6 +47,8 @@ http.createServer(function (req, res) {
   	try {
         var pageRef = req.url.substring(7);
         res.writeHead(200, {'Content-Type': 'text/html'});
+        console.log(when()+" About to concatenate strings..);
+        
         var editResource = workDir + '/' + pageRef;
         
         console.log(when()+" Edit request for "+editResource);
