@@ -44,7 +44,7 @@ http.createServer(function (req, res) {
     return;
   }  
   if( req.url.indexOf('/@edit/') == 0 ) {
-  	console.log(when()+" Entering edit...");  // debugging
+  	console.log(when()+" Entering edit...");  // debugging 5
   	try {
         var pageRef = req.url.substring(7);
         res.writeHead(200, {'Content-Type': 'text/html'});
