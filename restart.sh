@@ -9,7 +9,7 @@ fi
 
 rm $PIDFILE
 
-EXPR="sudo node server.js >> /var/tmp/editor.node.js-master-server.log &"
+EXPR="sudo node server.js >> /var/tmp/editor.node.js-master-server.log 2>&1 &"
 eval $EXPR
 PID=$!
 
