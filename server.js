@@ -53,6 +53,7 @@ http.createServer(function (req, res) {
         
         console.log(when()+" Edit request for "+editResource);
         
+        // need to upgrade to 0.6 or 0.8 for fs.existsSync: https://github.com/viatropos/tower/issues/341
         if( path.existsSync(editResource) ) {
             body = "edit the page: "+ pageRef;        
         } else {
