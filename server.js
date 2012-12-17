@@ -11,6 +11,7 @@ logger = new (winston.Logger)({
 }); 	
 */
 
+var workDir = "workspace";
 
  	
 http.createServer(function (req, res) {
@@ -19,7 +20,7 @@ http.createServer(function (req, res) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
     try {
    	  fs.readFile(logfile, "binary", function(err, file) {
-	  	  if(err) {
+	    if(err) {
           res.writeHead(500, {"Content-Type": "text/plain"});
           res.write(err + "\n");
           res.end();
@@ -35,11 +36,19 @@ http.createServer(function (req, res) {
       console.log(when()+" An error occurred:");
       console.log(e);      
     }
-    
-  } else {
-  	res.writeHead(200, {'Content-Type': 'text/plain'});
-  	res.end('You requested '+req.url+'\n');
+    return;
+  } 
+  if( req.url == '/@configuration' ) {
+      
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Configuration: {"workDir": "'+workDir+'"}\n');
+
+    return;
   }
+  
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('You requested '+req.url+'\n');
+  
 }).listen(80);
 console.log(when()+' Server re/started on port 80.');
 
