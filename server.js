@@ -54,12 +54,13 @@ http.createServer(function (req, res) {
         console.log(when()+" Edit request for "+editResource);
         
         var body = "";
+/*        
         if( fs.existsSync(editResource) ) {
             body = "edit the page: "+ pageRef;        
         } else {
             body = "Could not edit the page: "+ pageRef + " - it doesn't exist (yet)";
         }    
-        
+*/        
         var out = "<html><head>"
         + "</head><body>"
         + body
