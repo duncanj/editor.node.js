@@ -9,7 +9,7 @@ fi
 
 rm $PIDFILE
 
-EXPR="node server.js &"
+EXPR="sudo node server.js &"
 eval $EXPR
 PID=$!
 
