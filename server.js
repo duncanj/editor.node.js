@@ -3,19 +3,24 @@ var http = require('http'),
 http.createServer(function (req, res) {
   if( req.url == '/@process.log' ) {
     var logfile = '/var/tmp/editor.node.js-master-server.log';
- 	  fs.readFile(filename, "binary", function(err, file) {
-	    if(err) {
-        response.writeHead(500, {"Content-Type": "text/plain"});
-        response.write(err + "\n");
+    try {
+   	  fs.readFile(filename, "binary", function(err, file) {
+	  	  if(err) {
+          response.writeHead(500, {"Content-Type": "text/plain"});
+          response.write(err + "\n");
+          response.end();
+          return;
+        }
+
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        response.write(file, "binary");
         response.end();
-        return;
-      }
 
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      response.write(file, "binary");
-      response.end();
-
-    });    
+      });    
+    } catch (e) {
+      console.log("An error occurred:");
+      console.log(e);      
+    }
     
   } else {
   	res.writeHead(200, {'Content-Type': 'text/plain'});
