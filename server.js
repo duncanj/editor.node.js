@@ -64,8 +64,10 @@ http.createServer(function (req, res) {
         + "</body></html>\n";
         res.end(out);        
   	} catch (e) {
-      console.log(when()+" An error occurred:");
-      console.log(e);      
+        console.log(when()+" An error occurred:");
+        console.log(e);      
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Error: '+e+'\n');      
     }
     return;
   }
