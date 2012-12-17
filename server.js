@@ -1,4 +1,5 @@
 var http = require('http'), 
+	path = require("path")
  	fs = require("fs");
 
 // sudo npm install winston
@@ -52,7 +53,7 @@ http.createServer(function (req, res) {
         
         console.log(when()+" Edit request for "+editResource);
         
-        if( fs.existsSync(editResource) ) {
+        if( path.existsSync(editResource) ) {
             body = "edit the page: "+ pageRef;        
         } else {
             body = "Could not edit the page: "+ pageRef + " - it doesn't exist (yet)";
